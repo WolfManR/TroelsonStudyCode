@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WPFVersion"
         mc:Ignorable="d"
         Title="MainWindow" Height="200" Width="400">
+    
     <Grid Grid.IsSharedSizeScope="True" Margin="5,0,5,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -21,7 +22,8 @@
             <Label Content="Vehicle"/>
             <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName"/>
         </Grid>
-        <Grid Grid.Row="1" Name="DetailsGrid">
+        
+        <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=cboCars,Path=SelectedItem}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="CarLabels"/>
                 <ColumnDefinition Width="*"/>
@@ -34,13 +36,13 @@
             </Grid.RowDefinitions>
 
             <Label Content="Make"/>
-            <TextBox Grid.Column="1"/>
+            <TextBox Grid.Column="1" Text="{Binding Make}"/>
 
             <Label Grid.Row="1" Content="Color"/>
-            <TextBox Grid.Row="1" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Color}"/>
 
             <Label Grid.Row="2" Content="Pet Name"/>
-            <TextBox Grid.Row="2" Grid.Column="1"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PetName}"/>
 
             <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
                 <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2"/>
