@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using WPFVersion.Models;
@@ -10,7 +11,7 @@ namespace WPFVersion
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly IList<Inventory> _cars = new List<Inventory>();
+        readonly IList<Inventory> _cars = new ObservableCollection<Inventory>();
         public MainWindow()
         {
             InitializeComponent();
