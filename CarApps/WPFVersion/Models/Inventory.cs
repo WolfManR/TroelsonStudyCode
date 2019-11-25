@@ -9,6 +9,7 @@ namespace WPFVersion.Models
         private string color;
         private string make;
         private string petName;
+        private bool isChanged;
 
         public int CarId
         {
@@ -42,7 +43,7 @@ namespace WPFVersion.Models
         }
         public string PetName
         {
-            get => petName; 
+            get => petName;
             set
             {
                 if (petName == value) return;
@@ -50,11 +51,21 @@ namespace WPFVersion.Models
                 OnPropertyChanged();
             }
         }
-
+        public bool IsChanged
+        {
+            get => isChanged; 
+            set
+            {
+                if (isChanged == value) return;
+                isChanged = value;
+                OnPropertyChanged();
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
+            if (propertyName != nameof(IsChanged)) IsChanged = true;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
