@@ -45,8 +45,8 @@
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PetName}"/>
 
             <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
-                <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2"/>
-                <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2"/>
+                <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Click="btnAddCar_Click"/>
+                <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" Click="btnChangeColor_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
