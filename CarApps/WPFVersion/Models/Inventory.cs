@@ -1,72 +1,16 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace WPFVersion.Models
 {
-    public class Inventory : INotifyPropertyChanged
+    public class Inventory:INotifyPropertyChanged
     {
-        private int carId;
-        private string color;
-        private string make;
-        private string petName;
-        private bool isChanged;
+        public int CarId { get; set; }
+        public string Make { get; set; }
+        public string Color { get; set; }
+        public string PetName { get; set; }
 
-        public int CarId
-        {
-            get => carId;
-            set
-            {
-                if (carId == value) return;
-                carId = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Make
-        {
-            get => make;
-            set
-            {
-                if (make == value) return;
-                make = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Color
-        {
-            get => color;
-            set
-            {
-                if (color == value) return;
-                color = value;
-                OnPropertyChanged(nameof(Color));  //Attribute CallerMemberName not needed with "nameof()" method
-            }
-        }
-        public string PetName
-        {
-            get => petName;
-            set
-            {
-                if (petName == value) return;
-                petName = value;
-                OnPropertyChanged();
-            }
-        }
-        public bool IsChanged
-        {
-            get => isChanged; 
-            set
-            {
-                if (isChanged == value) return;
-                isChanged = value;
-                OnPropertyChanged();
-            }
-        }
+        // Important to work with Nuget package PropertyChanged.Fody
+        public bool IsChanged { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (propertyName != nameof(IsChanged)) IsChanged = true;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
