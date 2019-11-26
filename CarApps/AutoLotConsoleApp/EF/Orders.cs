@@ -17,6 +17,6 @@ namespace AutoLotConsoleApp.EF
 
         public virtual Customers Customers { get; set; }
 
-        public virtual Inventory Inventory { get; set; }
+        public virtual Car Car { get; set; }
     }
 }

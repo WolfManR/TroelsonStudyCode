@@ -14,14 +14,14 @@ namespace AutoLotConsoleApp.EF
 
         public virtual DbSet<CreditRisk> CreditRisk { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Inventory> Inventory { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Inventory>()
+            modelBuilder.Entity<Car>()
                 .HasMany(e => e.Orders)
-                .WithRequired(e => e.Inventory)
+                .WithRequired(e => e.Car)
                 .WillCascadeOnDelete(false);
         }
     }
