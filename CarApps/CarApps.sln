@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFVersion", "WPFVersion\WP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProviderFactoryADONet", "DataProviderFactoryADONet\DataProviderFactoryADONet.csproj", "{F836557B-FEBD-4F07-8967-58362A1BEABF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLotDataReader", "AutoLotDataReader\AutoLotDataReader.csproj", "{00CA573E-9919-4668-BF80-BCDE759B411D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F836557B-FEBD-4F07-8967-58362A1BEABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F836557B-FEBD-4F07-8967-58362A1BEABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F836557B-FEBD-4F07-8967-58362A1BEABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00CA573E-9919-4668-BF80-BCDE759B411D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00CA573E-9919-4668-BF80-BCDE759B411D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00CA573E-9919-4668-BF80-BCDE759B411D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00CA573E-9919-4668-BF80-BCDE759B411D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
