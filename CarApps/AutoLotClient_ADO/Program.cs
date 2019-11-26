@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
+using AutoLotDAL_ADO.BulkImport;
 using AutoLotDAL_ADO.DataOperations;
 using AutoLotDAL_ADO.Models;
 
