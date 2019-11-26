@@ -14,7 +14,7 @@ namespace DataProviderFactoryADONet
             WriteLine("Fun with Data Provider Factories\n");
 
             string dataProvider = ConfigurationManager.AppSettings["provider"];
-            string connectionString = ConfigurationManager.AppSettings["connectionString"];
+            string connectionString = ConfigurationManager.ConnectionStrings["AutoLotSqlProvider"].ConnectionString;
 
             DbProviderFactory factory = DbProviderFactories.GetFactory(dataProvider);
 
