@@ -90,7 +90,6 @@ namespace AutoLotDAL_ADO.DataOperations
 
             // Format and execute SQL statement.
             string sql = $"Insert Into Inventory (Make, Color, PetName) Values ('{make}', '{color}', '{petName}')";
-
             // Execute using our connection.
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
             {
@@ -267,11 +266,7 @@ namespace AutoLotDAL_ADO.DataOperations
 
             // Create command objects that represent each step of the operation.
             var cmdRemove =  new SqlCommand($"Delete from Customers where CustId = {custId}", _sqlConnection);
-
-
-
-            var cmdInsert =  new SqlCommand("Insert Into CreditRisks" 
-                +  $"(FirstName, LastName) Values('{fName}', '{lName}')",  _sqlConnection);
+            var cmdInsert =  new SqlCommand($"Insert Into CreditRisks (FirstName, LastName) Values('{fName}', '{lName}')",  _sqlConnection);
 
             // We will get this from the connection object.
             SqlTransaction tx = null;
@@ -289,10 +284,7 @@ namespace AutoLotDAL_ADO.DataOperations
                 cmdRemove.ExecuteNonQuery();                
 
                 // Simulate error.
-                if (throwEx)
-                {
-                    throw new Exception("Sorry!  Database error! Tx failed...");
-                }
+                if (throwEx) throw new Exception("Sorry!  Database error! Tx failed...");
                 
                 // Commit it!
                 tx.Commit();
