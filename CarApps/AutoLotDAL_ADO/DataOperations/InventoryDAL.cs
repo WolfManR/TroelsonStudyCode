@@ -154,7 +154,8 @@ namespace AutoLotDAL_ADO.DataOperations
                     SqlDbType = SqlDbType.Char,
                     Size = 10
                 };
-                command.Parameters.Add(parameter);                                
+                command.Parameters.Add(parameter); 
+                
                 command.ExecuteNonQuery();
                 CloseConnection();
             }
