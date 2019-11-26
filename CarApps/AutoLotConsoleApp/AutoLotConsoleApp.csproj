@@ -58,6 +58,7 @@
     <Compile Include="EF\Customers.cs" />
     <Compile Include="EF\Car.cs" />
     <Compile Include="EF\Orders.cs" />
+    <Compile Include="Models\ShortCar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
