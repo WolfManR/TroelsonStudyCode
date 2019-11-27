@@ -15,8 +15,13 @@ namespace WPFVersion
     {
         private ICommand _changeColorCommand = null;
         private ICommand _addCarCommand = null;
+        private RelayCommand<Inventory> _deleteCarCommand = null;
+
         public ICommand ChangeColorCmd => _changeColorCommand ?? (_changeColorCommand = new ChangeColorCommand());
         public ICommand AddCarCmd => _addCarCommand ?? (_addCarCommand = new AddCarCommand());
+        public RelayCommand<Inventory> DeleteCarCmd => _deleteCarCommand ?? (_deleteCarCommand = new RelayCommand<Inventory>(DeleteCar, CanDeleteCar));
+
+        
 
         readonly IList<Inventory> _cars = new ObservableCollection<Inventory>();
         public MainWindow()
@@ -26,5 +31,8 @@ namespace WPFVersion
             _cars.Add(new Inventory { CarId = 2, Color = "Red", Make = "Ford", PetName = "Red Rider", IsChanged = false });
             cboCars.ItemsSource = _cars;
         }
+
+        private bool CanDeleteCar(Inventory car) => car != null;
+        private void DeleteCar(Inventory car) { _cars.Remove(car); }
     }
 }
