@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFVersion"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="400">
+        Title="MainWindow" Height="250" Width="400">
     
     <Grid Grid.IsSharedSizeScope="True" Margin="5,0,5,5">
         <Grid.RowDefinitions>
@@ -34,23 +34,27 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Make"/>
-            <TextBox Grid.Column="1" Text="{Binding Make}"/>
+            <Label Content="Id"/>
+            <TextBox Grid.Column="1" Text="{Binding CarId}"/>
 
-            <Label Grid.Row="1" Content="Color"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Color}"/>
+            <Label Grid.Row="1" Content="Make"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Make}"/>
 
-            <Label Grid.Row="2" Content="Pet Name"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PetName}"/>
+            <Label Grid.Row="2" Content="Color"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Color}"/>
 
-            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
+            <Label Grid.Row="3" Content="Pet Name"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PetName}"/>
+
+            <StackPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
                 <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Click="btnAddCar_Click"/>
                 <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" Click="btnChangeColor_Click"/>
             </StackPanel>
 
-            <Label Grid.Row="4" Content="IsChanged"/>
+            <Label Grid.Row="5" Content="IsChanged"/>
             <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged}"/>
         </Grid>
     </Grid>

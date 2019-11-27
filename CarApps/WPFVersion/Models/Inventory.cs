@@ -2,7 +2,7 @@
 
 namespace WPFVersion.Models
 {
-    public class Inventory:INotifyPropertyChanged
+    public partial class Inventory:INotifyPropertyChanged
     {
         public int CarId { get; set; }
         public string Make { get; set; }
