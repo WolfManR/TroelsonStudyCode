@@ -18,16 +18,24 @@ namespace WPFVersion.Models
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
+
         public IEnumerable GetErrors(string propertyName)
         {
             if (string.IsNullOrEmpty(propertyName)) return _errors.Values;
             return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
         }
+        //private IList<string> GetErrorsFromAnnotations(string v, int carId)
+        //{
+        //    var results = new List<ValidationResult>();
+        //    var vc = new ValidationContext(this, null, null) { MemberName = propertyName };
+        //    var isValid = Validator.TryValidateProperty(value, vc, results);
+        //    return (isValid) ? null : Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);        
+        //}
+
         protected void AddError(string propertyName, string error)
         {
             AddErrors(propertyName, new List<string> { error });
         }
-        
         protected void AddErrors(string propertyName, IList<string> errors)
         {
             if (errors == null || errors.Count == 0) return;
@@ -46,6 +54,7 @@ namespace WPFVersion.Models
             }
             if (changed) OnErrorsChanged(propertyName);
         }
+
         protected void ClearErrors(string propertyName = "")
         {
             if (String.IsNullOrEmpty(propertyName)) _errors.Clear();
@@ -79,7 +88,7 @@ namespace WPFVersion.Models
                 switch (columnName)
                 {
                     case nameof(CarId):
-                        AddErrors(nameof(CarId), GetErrorsFromAnnotations(nameof(CarId), CarId));
+                        //AddErrors(nameof(CarId), GetErrorsFromAnnotations(nameof(CarId), CarId));
                         break;
                     case nameof(Make):
                         hasError = CheckMakeAndColor();
@@ -113,10 +122,7 @@ namespace WPFVersion.Models
             }
         }
 
-        private IList<string> GetErrorsFromAnnotations(string v, int carId)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         //internal string CheckMakeAndColor()
         //{
