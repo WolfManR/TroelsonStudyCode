@@ -15,7 +15,7 @@ namespace AutoLotDAL_EF.EF
 
         public virtual DbSet<CreditRisk> CreditRisk { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Inventory> Cars { get; set; }
+        public virtual DbSet<Inventory> Inventory { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

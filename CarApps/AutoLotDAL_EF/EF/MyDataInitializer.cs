@@ -31,7 +31,7 @@ namespace AutoLotDAL_EF.EF
                 new Inventory {Make = "Pinto", Color = "Black", PetName = "Pete"},
                 new Inventory {Make = "Yugo", Color = "Brown", PetName = "Brownie"},
             };
-            context.Cars.AddOrUpdate(x => new { x.Make, x.Color }, cars.ToArray());
+            context.Inventory.AddOrUpdate(x => new { x.Make, x.Color }, cars.ToArray());
 
             var orders = new List<Orders>
             {

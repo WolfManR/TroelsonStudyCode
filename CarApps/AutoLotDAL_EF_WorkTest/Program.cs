@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoLotDAL_EF.EF;
+using AutoLotDAL_EF.Models;
+using System;
+using System.Data.Entity;
 
 namespace AutoLotDAL_EF_WorkTest
 {
@@ -10,6 +9,13 @@ namespace AutoLotDAL_EF_WorkTest
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("***** Fun with ADO.NET EF Code First *****\n");    
+            
+            Database.SetInitializer(new MyDataInitializer());
+            using (var context = new AutoLotEntities())
+            {
+                foreach (Inventory c in context.Inventory) Console.WriteLine(c);
+            }
         }
     }
 }
