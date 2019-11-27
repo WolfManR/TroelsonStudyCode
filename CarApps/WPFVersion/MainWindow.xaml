@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFVersion"
         mc:Ignorable="d"
-        Title="MainWindow" Height="250" Width="400">
+        Title="MainWindow" Height="300" Width="400">
     
     <Grid Grid.IsSharedSizeScope="True" Margin="5,0,5,5">
         <Grid.RowDefinitions>
@@ -35,6 +35,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Label Content="Id"/>
@@ -55,7 +56,15 @@
             </StackPanel>
 
             <Label Grid.Row="5" Content="IsChanged"/>
-            <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged,ValidatesOnDataErrors=True}"/>
+            <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged}"/>
+
+            <ListBox Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding ElementName=DetailsGrid,Path=(Validation.Errors)}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ListBox ItemsSource="{Binding ErrorContent}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>
