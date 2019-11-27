@@ -1,22 +1,14 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WPFVersion.Models;
 
 namespace WPFVersion.Cmds
 {
-    class ChangeColorCommand:ICommand
+    class ChangeColorCommand:CommandBase,ICommand
     {
-        public bool CanExecute(object parameter) => (parameter as Inventory) != null;
-        
-        public void Execute(object parameter)
+        public override bool CanExecute(object parameter) => (parameter as Inventory) != null;
+        public override void Execute(object parameter)
         {
             ((Inventory)parameter).Color = "Pink";
-        }
-        
-        public event EventHandler CanExecuteChanged
-        {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
         }
     }
 }
