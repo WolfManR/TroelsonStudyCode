@@ -1,5 +1,5 @@
 ﻿using AutoLotDAL_EF.EF;
-using AutoLotDAL_EF.Models;
+using AutoLotDAL_EF.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

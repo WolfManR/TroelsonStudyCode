@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AutoLotDAL_EF.Models
+namespace AutoLotDAL_EF.Models.Models
 {
     public partial class Orders:EntityBase
     {

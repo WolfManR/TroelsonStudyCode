@@ -2,23 +2,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AutoLotDAL_EF.Models
+namespace AutoLotDAL_EF.Models.Models
 {
-    public partial class Customers:EntityBase
+    [Table("Inventory")]
+    public partial class Inventory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customers() { }
+        public Inventory(){}
 
         [StringLength(50)]
-        public string FirstName { get; set; }
+        public string Make { get; set; }
 
         [StringLength(50)]
-        public string LastName { get; set; }
+        public string Color { get; set; }
 
-        [NotMapped]
-        public string FullName => FirstName + " " + LastName;
+        [StringLength(50)]
+        public string PetName { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; } = new HashSet<Orders>();
+        public virtual ICollection<Orders> Orders { get; set; }=new HashSet<Orders>();
     }
 }

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AutoLotDAL_EF.Models
+namespace AutoLotDAL_EF.Models.Models
 {
     [Table("CreditRisk")]
     public partial class CreditRisk:EntityBase

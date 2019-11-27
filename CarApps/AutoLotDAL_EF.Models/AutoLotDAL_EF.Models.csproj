@@ -5,19 +5,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ADDDEE90-8DF5-4941-8361-5B3A00415FFD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>AutoLotDAL_EF_WorkTest</RootNamespace>
-    <AssemblyName>AutoLotDAL_EF_WorkTest</AssemblyName>
+    <ProjectGuid>{A6C2190A-E1BD-4B94-8329-3290B51AE13A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AutoLotDAL_EF.Models</RootNamespace>
+    <AssemblyName>AutoLotDAL_EF.Models</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,7 +26,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -53,22 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Models\CreditRisk.cs" />
+    <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\EntityBase.cs" />
+    <Compile Include="Models\Inventory.cs" />
+    <Compile Include="Models\InventoryPartial.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AutoLotDAL_EF.Models\AutoLotDAL_EF.Models.csproj">
-      <Project>{A6C2190A-E1BD-4B94-8329-3290B51AE13A}</Project>
-      <Name>AutoLotDAL_EF.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AutoLotDAL_EF\AutoLotDAL_EF.csproj">
-      <Project>{f0f10c2b-3d18-455a-a522-f28b0709d7ae}</Project>
-      <Name>AutoLotDAL_EF</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

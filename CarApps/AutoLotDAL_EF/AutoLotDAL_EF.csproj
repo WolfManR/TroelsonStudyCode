@@ -63,12 +63,6 @@
       <DependentUpon>201911271041176_Final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\EntityBase.cs" />
-    <Compile Include="Models\Inventory.cs" />
-    <Compile Include="Models\InventoryPartial.cs" />
-    <Compile Include="Models\CreditRisk.cs" />
-    <Compile Include="Models\Customers.cs" />
-    <Compile Include="Models\Orders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\BaseRepo.cs" />
     <Compile Include="Repos\InventoryRepo.cs" />
@@ -85,6 +79,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoLotDAL_EF.Models\AutoLotDAL_EF.Models.csproj">
+      <Project>{a6c2190a-e1bd-4b94-8329-3290b51ae13a}</Project>
+      <Name>AutoLotDAL_EF.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

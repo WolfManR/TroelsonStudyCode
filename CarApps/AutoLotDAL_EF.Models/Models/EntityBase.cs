@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AutoLotDAL_EF.Models
+namespace AutoLotDAL_EF.Models.Models
 {
     public class EntityBase
     {

@@ -2,10 +2,10 @@ using System;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using AutoLotDAL_EF.Models;
 using System.Data.Entity.Infrastructure.Interception;
 using AutoLotDAL_EF.Interception;
 using System.Data.Entity.Core.Objects;
+using AutoLotDAL_EF.Models.Models;
 
 namespace AutoLotDAL_EF.EF
 {
