@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFVersion"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="400">
+        Title="MainWindow" Height="300" Width="400"
+        DataContext="{Binding ViewModel,RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}">
             <Style.Triggers>
@@ -42,7 +43,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Vehicle"/>
-            <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName"/>
+            <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName" ItemsSource="{Binding Cars}"/>
         </Grid>
         
         <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=cboCars,Path=SelectedItem}">
@@ -73,9 +74,9 @@
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PetName,ValidatesOnDataErrors=True}"/>
 
             <StackPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
-                <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=AddCarCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=ItemsSource}"/>
-                <Button x:Name="btnDeleteCar" Content="Delete Car" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DeleteCarCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=SelectedItem}"/>
-                <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=ChangeColorCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=SelectedItem}"/>
+                <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DataContext.AddCarCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=ItemsSource}"/>
+                <Button x:Name="btnDeleteCar" Content="Delete Car" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DataContext.DeleteCarCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=SelectedItem}"/>
+                <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DataContext.ChangeColorCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=SelectedItem}"/>
             </StackPanel>
 
             <Label Grid.Row="5" Content="IsChanged"/>
