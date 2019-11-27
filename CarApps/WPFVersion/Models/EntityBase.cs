@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,19 @@ namespace WPFVersion.Models
             if (string.IsNullOrEmpty(propertyName)) return _errors.Values;
             return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
         }
+        protected string[] GetErrorsFromAnnotations<T>(string propertyName, T value)
+        {
+            var results = new List<ValidationResult>();
+            var vc = new ValidationContext(this, null, null) { MemberName = propertyName };
+            var isValid = Validator.TryValidateProperty(value, vc, results);
+            return (isValid) ? null : Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);
+        }
         //private IList<string> GetErrorsFromAnnotations(string v, int carId)
         //{
         //    var results = new List<ValidationResult>();
         //    var vc = new ValidationContext(this, null, null) { MemberName = propertyName };
         //    var isValid = Validator.TryValidateProperty(value, vc, results);
-        //    return (isValid) ? null : Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);        
+        //    return (isValid) ? null : Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);
         //}
 
         protected void AddError(string propertyName, string error)
