@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Spatial;
 
 namespace AutoLotDAL_EF.Models
 {
-    public partial class Orders
+    public partial class Orders:EntityBase
     {
-        [Key]
-        public int OrderId { get; set; }
-
-        public int CustId { get; set; }
-
+        public int CustomerId { get; set; }
         public int CarId { get; set; }
 
+        [ForeignKey(nameof(CustomerId))]
         public virtual Customers Customers { get; set; }
 
+        [ForeignKey(nameof(CarId))]
         public virtual Inventory Inventory { get; set; }
     }
 }

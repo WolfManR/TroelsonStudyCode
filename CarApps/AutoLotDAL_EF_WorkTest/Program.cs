@@ -14,7 +14,7 @@ namespace AutoLotDAL_EF_WorkTest
             //Database.SetInitializer(new MyDataInitializer());
             using (var context = new AutoLotEntities())
             {
-                foreach (Inventory c in context.Inventory) Console.WriteLine(c);
+                foreach (Inventory c in context.Cars) Console.WriteLine(c);
             }
             Console.ReadLine();
         }

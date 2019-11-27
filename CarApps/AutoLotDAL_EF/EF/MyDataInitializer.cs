@@ -31,7 +31,7 @@ namespace AutoLotDAL_EF.EF
                 new Inventory {Make = "Pinto", Color = "Black", PetName = "Pete"},
                 new Inventory {Make = "Yugo", Color = "Brown", PetName = "Brownie"},
             };
-            context.Inventory.AddOrUpdate(x => new { x.Make, x.Color }, cars.ToArray());
+            context.Cars.AddOrUpdate(x => new { x.Make, x.Color }, cars.ToArray());
 
             var orders = new List<Orders>
             {
@@ -40,12 +40,12 @@ namespace AutoLotDAL_EF.EF
                 new Orders {Inventory = cars[2], Customers = customers[2]},
                 new Orders {Inventory = cars[3], Customers = customers[3]},
             };
-            orders.ForEach(x => context.Orders.AddOrUpdate(c => new { c.CarId, c.CustId }, x));            
+            orders.ForEach(x => context.Orders.AddOrUpdate(c => new { c.CarId, c.CustomerId }, x));            
 
             context.CreditRisk.AddOrUpdate(x => new { x.FirstName, x.LastName }, 
                 new CreditRisk
                 {
-                    CustID = customers[4].CustID,
+                    Id = customers[4].Id,
                     FirstName = customers[4].FirstName,
                     LastName = customers[4].LastName,
                 });
