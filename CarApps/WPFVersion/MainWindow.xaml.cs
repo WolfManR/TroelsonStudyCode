@@ -14,7 +14,9 @@ namespace WPFVersion
     public partial class MainWindow : Window
     {
         private ICommand _changeColorCommand = null;
+        private ICommand _addCarCommand = null;
         public ICommand ChangeColorCmd => _changeColorCommand ?? (_changeColorCommand = new ChangeColorCommand());
+        public ICommand AddCarCmd => _addCarCommand ?? (_addCarCommand = new AddCarCommand());
 
         readonly IList<Inventory> _cars = new ObservableCollection<Inventory>();
         public MainWindow()
@@ -23,14 +25,6 @@ namespace WPFVersion
             _cars.Add(new Inventory { CarId = 1, Color = "Blue", Make = "Chevy", PetName = "Kit", IsChanged = false });
             _cars.Add(new Inventory { CarId = 2, Color = "Red", Make = "Ford", PetName = "Red Rider", IsChanged = false });
             cboCars.ItemsSource = _cars;
-        }
-
-       
-
-        private void btnAddCar_Click(object sender, RoutedEventArgs e)
-        {
-            var maxCount = _cars?.Max(x => x.CarId) ?? 0;
-            _cars?.Add(new Inventory { CarId = ++maxCount, Color = "Yellow", Make = "VM", PetName = "Birdie" });
         }
     }
 }
