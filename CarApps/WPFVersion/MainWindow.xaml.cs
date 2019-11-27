@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+using WPFVersion.Cmds;
 using WPFVersion.Models;
 
 namespace WPFVersion
@@ -11,6 +13,9 @@ namespace WPFVersion
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ICommand _changeColorCommand = null;
+        public ICommand ChangeColorCmd => _changeColorCommand ?? (_changeColorCommand = new ChangeColorCommand());
+
         readonly IList<Inventory> _cars = new ObservableCollection<Inventory>();
         public MainWindow()
         {
@@ -20,10 +25,7 @@ namespace WPFVersion
             cboCars.ItemsSource = _cars;
         }
 
-        private void btnChangeColor_Click(object sender, RoutedEventArgs e)
-        {
-            _cars.First(x => x.CarId == ((Inventory)cboCars.SelectedItem)?.CarId).Color = "Pink";
-        }
+       
 
         private void btnAddCar_Click(object sender, RoutedEventArgs e)
         {
