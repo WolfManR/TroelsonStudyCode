@@ -16,6 +16,7 @@ namespace AutoLotDAL_EF_WorkTest
             {
                 foreach (Inventory c in context.Inventory) Console.WriteLine(c);
             }
+            Console.ReadLine();
         }
     }
 }
