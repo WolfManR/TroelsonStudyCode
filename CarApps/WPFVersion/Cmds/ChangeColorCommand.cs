@@ -1,9 +1,8 @@
-﻿using System.Windows.Input;
-using WPFVersion.Models;
+﻿using WPFVersion.Models;
 
 namespace WPFVersion.Cmds
 {
-    class ChangeColorCommand:CommandBase,ICommand
+    public class ChangeColorCommand:CommandBase
     {
         public override bool CanExecute(object parameter) => (parameter as Inventory) != null;
         public override void Execute(object parameter)
