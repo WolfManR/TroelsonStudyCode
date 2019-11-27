@@ -38,16 +38,16 @@
             </Grid.RowDefinitions>
 
             <Label Content="Id"/>
-            <TextBox Grid.Column="1" Text="{Binding CarId}"/>
+            <TextBox Grid.Column="1" Text="{Binding CarId,ValidatesOnDataErrors=True}"/>
 
             <Label Grid.Row="1" Content="Make"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Make}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Make,ValidatesOnDataErrors=True}"/>
 
             <Label Grid.Row="2" Content="Color"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Color}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Color,ValidatesOnDataErrors=True}"/>
 
             <Label Grid.Row="3" Content="Pet Name"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PetName}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PetName,ValidatesOnDataErrors=True}"/>
 
             <StackPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
                 <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Click="btnAddCar_Click"/>
@@ -55,7 +55,7 @@
             </StackPanel>
 
             <Label Grid.Row="5" Content="IsChanged"/>
-            <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged}"/>
+            <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged,ValidatesOnDataErrors=True}"/>
         </Grid>
     </Grid>
 </Window>
