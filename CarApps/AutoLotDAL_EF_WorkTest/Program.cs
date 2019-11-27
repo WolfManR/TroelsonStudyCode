@@ -11,7 +11,7 @@ namespace AutoLotDAL_EF_WorkTest
         {
             Console.WriteLine("***** Fun with ADO.NET EF Code First *****\n");    
             
-            Database.SetInitializer(new MyDataInitializer());
+            //Database.SetInitializer(new MyDataInitializer());
             using (var context = new AutoLotEntities())
             {
                 foreach (Inventory c in context.Inventory) Console.WriteLine(c);
