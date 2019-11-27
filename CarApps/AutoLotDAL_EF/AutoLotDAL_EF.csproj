@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201911271008304_Initial.designer.cs">
       <DependentUpon>201911271008304_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911271041176_Final.cs" />
+    <Compile Include="Migrations\201911271041176_Final.designer.cs">
+      <DependentUpon>201911271041176_Final.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\Inventory.cs" />
@@ -69,6 +73,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911271008304_Initial.resx">
       <DependentUpon>201911271008304_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911271041176_Final.resx">
+      <DependentUpon>201911271041176_Final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
