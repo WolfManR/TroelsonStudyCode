@@ -1,4 +1,4 @@
-﻿using AutoLotDAL_EF.Models.Models;
+﻿using AutoLotDAL_EF.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

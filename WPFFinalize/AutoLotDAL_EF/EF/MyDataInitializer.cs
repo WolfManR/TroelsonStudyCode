@@ -1,26 +1,14 @@
-﻿using AutoLotDAL_EF.Models.Models;
-using System;
+﻿using AutoLotDAL_EF.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using System.Linq;
 
-namespace AutoLotDAL_EF.Migrations
+namespace AutoLotDAL_EF.EF
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<AutoLotDAL_EF.EF.AutoLotEntities>
+    public class MyDataInitializer:DropCreateDatabaseAlways<AutoLotEntities>
     {
-        public Configuration()
+        protected override void Seed(AutoLotEntities context)
         {
-            AutomaticMigrationsEnabled = false;
-        }
-
-        protected override void Seed(AutoLotDAL_EF.EF.AutoLotEntities context)
-        {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
-
             var customers = new List<Customers>
             {
                 new Customers {FirstName = "Dave", LastName = "Brenner"},
@@ -52,9 +40,9 @@ namespace AutoLotDAL_EF.Migrations
                 new Orders {Inventory = cars[2], Customers = customers[2]},
                 new Orders {Inventory = cars[3], Customers = customers[3]},
             };
-            orders.ForEach(x => context.Orders.AddOrUpdate(c => new { c.CarId, c.CustomerId }, x));
+            orders.ForEach(x => context.Orders.AddOrUpdate(c => new { c.CarId, c.CustomerId }, x));            
 
-            context.CreditRisk.AddOrUpdate(x => new { x.FirstName, x.LastName },
+            context.CreditRisk.AddOrUpdate(x => new { x.FirstName, x.LastName }, 
                 new CreditRisk
                 {
                     Id = customers[4].Id,
