@@ -28,6 +28,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AutoLotWCFService", "AutoLotWCFService\", "{E165D64C-BAD3-4440-A3F8-6924F8C8AC7E}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
+		ProjectReferences = "{f0f10c2b-3d18-455a-a522-f28b0709d7ae}|AutoLotDAL_EF.dll;{A6C2190A-E1BD-4B94-8329-3290B51AE13A}|AutoLotDAL_EF.Models.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_52436"
 		Debug.AspNetCompiler.PhysicalPath = "AutoLotWCFService\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52436\"
