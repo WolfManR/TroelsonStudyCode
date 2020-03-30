@@ -112,7 +112,7 @@ namespace CarLotMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = db.Cars.Find(id);
+            Inventory inventory = _repo.GetOne(id);
             if (inventory == null)
             {
                 return HttpNotFound();
@@ -121,13 +121,24 @@ namespace CarLotMVC.Controllers
         }
 
         // POST: Inventory/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete([Bind(Include = "Id,Timestamp")] Inventory inventory)
         {
-            Inventory inventory = db.Cars.Find(id);
-            db.Cars.Remove(inventory);
-            db.SaveChanges();
+            try
+            {
+                _repo.Delete(inventory);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Unable to delete the record. Another user has updated the record. {ex.Message}"); // Не удаётся удалить запись. Другой пользователь обновил её.
+                return View(inventory);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Unable to delete the record. {ex.Message}"); // Не удаётся удалить запись.
+                return View(inventory);
+            }
             return RedirectToAction("Index");
         }
 

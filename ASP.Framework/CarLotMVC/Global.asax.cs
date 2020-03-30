@@ -19,7 +19,7 @@ namespace CarLotMVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer(new MyDataInitializer());
+            //Database.SetInitializer(new MyDataInitializer());
         }
     }
 }
