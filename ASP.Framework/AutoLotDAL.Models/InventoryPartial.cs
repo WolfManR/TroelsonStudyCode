@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using AutoLotDAL.Models.MetaData;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoLotDAL.Models
 {
+    [MetadataType(typeof(InventoryMetaData))]
     public partial class Inventory : EntityBase
     {
         [NotMapped]
