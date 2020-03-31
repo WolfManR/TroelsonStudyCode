@@ -1,25 +1,59 @@
-﻿using System;
+﻿using AutoLotDAL.Models;
+using AutoLotDAL.Repos;
+using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace CarLotWebAPI.Controllers
 {
     [RoutePrefix("api/Inventory")]
     public class InventoryController:ApiController
     {
-        [HttpGet,Route("")]
-        public IEnumerable<string> Get()
+        IMapper Mapper;
+        readonly InventoryRepo _repo = new InventoryRepo();
+        public InventoryController()
         {
-            return new string[] { "value1", "value2" };
+            this.Mapper= new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Inventory, Inventory>()
+                    .ForMember(x => x.Orders, opt => opt.Ignore());
+                }).CreateMapper();
         }
 
-        // GET api/values/5
-        [HttpGet, Route("{id}")]
-        public string Get(int id)
+        // GET: api/Inventory
+        [HttpGet,Route("")]
+        public IEnumerable<Inventory> GetInventory()
         {
-            return id.ToString();
+            var inventories = _repo.GetAll();
+            return Mapper.Map<List<Inventory>, List<Inventory>>(inventories);
+        }
+
+        // GET: api/Inventory/5
+        [HttpGet, Route("{id}",Name ="DisplayRoute")]
+        [ResponseType(typeof(Inventory))]
+        public async Task<IHttpActionResult> GetInventory(int id)
+        {
+            Inventory inventory = _repo.GetOne(id);
+            if(inventory == null)
+            {
+                return NotFound();
+            }
+            return Ok(Mapper.Map<Inventory, Inventory>(inventory));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _repo.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
