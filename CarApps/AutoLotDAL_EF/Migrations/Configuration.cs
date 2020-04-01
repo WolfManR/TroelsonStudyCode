@@ -1,12 +1,12 @@
-﻿namespace AutoLotDAL_EF.Migrations
-{
-    using AutoLotDAL_EF.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using AutoLotDAL_EF.Models.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
+namespace AutoLotDAL_EF.Migrations
+{
     internal sealed class Configuration : DbMigrationsConfiguration<AutoLotDAL_EF.EF.AutoLotEntities>
     {
         public Configuration()

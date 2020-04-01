@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFVersion"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="400">
-    
+        Title="MainWindow" Height="300" Width="400"
+        DataContext="{Binding ViewModel,RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Background" Value="Pink"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock Foreground="Red" FontSize="20" Text="!" ToolTip="{Binding ElementName=controlWithError,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                            <Border BorderBrush="Red" BorderThickness="1">
+                                <AdornedElementPlaceholder Name="controlWithError"/>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Grid.IsSharedSizeScope="True" Margin="5,0,5,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,7 +43,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Vehicle"/>
-            <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName"/>
+            <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName" ItemsSource="{Binding Cars}"/>
         </Grid>
         
         <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=cboCars,Path=SelectedItem}">
@@ -34,24 +57,38 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Make"/>
-            <TextBox Grid.Column="1" Text="{Binding Make}"/>
+            <Label Content="Id"/>
+            <TextBox Grid.Column="1" Text="{Binding CarId,ValidatesOnDataErrors=True}"/>
 
-            <Label Grid.Row="1" Content="Color"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Color}"/>
+            <Label Grid.Row="1" Content="Make"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Make,ValidatesOnDataErrors=True}"/>
 
-            <Label Grid.Row="2" Content="Pet Name"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PetName}"/>
+            <Label Grid.Row="2" Content="Color"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Color,ValidatesOnDataErrors=True}"/>
 
-            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
-                <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Click="btnAddCar_Click"/>
-                <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" Click="btnChangeColor_Click"/>
+            <Label Grid.Row="3" Content="Pet Name"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PetName,ValidatesOnDataErrors=True}"/>
+
+            <StackPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,5,0,5">
+                <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DataContext.AddCarCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=ItemsSource}"/>
+                <Button x:Name="btnDeleteCar" Content="Delete Car" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DataContext.DeleteCarCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=SelectedItem}"/>
+                <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" Command="{Binding Path=DataContext.ChangeColorCmd,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}" CommandParameter="{Binding ElementName=cboCars,Path=SelectedItem}"/>
             </StackPanel>
 
-            <Label Grid.Row="4" Content="IsChanged"/>
-            <CheckBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged}"/>
+            <Label Grid.Row="5" Content="IsChanged"/>
+            <CheckBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding IsChanged}"/>
+
+            <ListBox Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding ElementName=DetailsGrid,Path=(Validation.Errors)}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ListBox ItemsSource="{Binding ErrorContent}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>
