@@ -1,41 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
-using System.Web;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using AutoLotDAL.EF;
 using AutoLotDAL.Models;
-using AutoLotDAL.Repos;
+using Newtonsoft.Json;
 
 namespace CarLotMVC.Controllers
 {
     public class InventoryController : Controller
     {
-        private readonly InventoryRepo _repo = new InventoryRepo();
+        private string _baseUrl = "http://localhost:59182/api/Inventory";
+        HttpClient client = new HttpClient();
+
 
         // GET: Inventory
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(_repo.GetAll());
+            var response = await client.GetAsync(_baseUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                var items = JsonConvert.DeserializeObject<List<Inventory>>(await response.Content.ReadAsStringAsync());
+                return View(items);
+            }
+            return HttpNotFound();
         }
 
         // GET: Inventory/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = _repo.GetOne(id);
-            if (inventory == null)
+
+            var response = await client.GetAsync($"{_baseUrl}/{id.Value}");
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                var inventory = JsonConvert.DeserializeObject<Inventory>(await response.Content.ReadAsStringAsync());
+                return View(inventory);
             }
-            return View(inventory);
+            return HttpNotFound();
         }
 
         // GET: Inventory/Create
@@ -49,35 +56,42 @@ namespace CarLotMVC.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Make,Color,PetName")] Inventory inventory)
+        public async Task<ActionResult> Create([Bind(Include = "Make,Color,PetName")] Inventory inventory)
         {
             if (!ModelState.IsValid) return View(inventory);
 
             try
             {
-                _repo.Add(inventory);
+                string json = JsonConvert.SerializeObject(inventory);
+                var response = await client.PostAsync(_baseUrl, new StringContent(json, Encoding.UTF8, "application/json"));
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}"); // Не удаётся создать запись.
             }
 
-            return RedirectToAction("Index");
+            return View(inventory);
         }
 
         // GET: Inventory/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = _repo.GetOne(id);
-            if (inventory == null)
+
+            var response = await client.GetAsync($"{_baseUrl}/{id.Value}");
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                var inventory = JsonConvert.DeserializeObject<Inventory>(await response.Content.ReadAsStringAsync());
+                return View(inventory);
             }
-            return View(inventory);
+            return HttpNotFound();
         }
 
         // POST: Inventory/Edit/5
@@ -85,68 +99,62 @@ namespace CarLotMVC.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Make,Color,PetName,Timestamp")] Inventory inventory)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Make,Color,PetName,Timestamp")] Inventory inventory)
         {
             if (!ModelState.IsValid) return View(inventory);
-            try
+
+            string json = JsonConvert.SerializeObject(inventory);
+            var response = await client.PutAsync($"{_baseUrl}/{inventory.Id}", new StringContent(json, Encoding.UTF8, "application/json"));
+            if (response.IsSuccessStatusCode)
             {
-                _repo.Save(inventory);
+                return RedirectToAction("Index");
             }
-            catch(DbUpdateConcurrencyException ex)
-            {
-                ModelState.AddModelError(string.Empty, $@"Unable to save the record. Another user has updated it. {ex.Message}"); // Не удаётся сохранить запись. Другой пользователь обновил её.
-                return View(inventory);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, $@"Unable to save the record. {ex.Message}"); // Не удаётся сохранить запись.
-                return View(inventory);
-            }
-            return RedirectToAction("Index");
+            return View(inventory);
         }
 
         // GET: Inventory/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = _repo.GetOne(id);
-            if (inventory == null)
+
+            var response = await client.GetAsync($"{_baseUrl}/{id.Value}");
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                var inventory = JsonConvert.DeserializeObject<Inventory>(await response.Content.ReadAsStringAsync());
+                return View(inventory);
             }
-            return View(inventory);
+            return HttpNotFound();
         }
 
         // POST: Inventory/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete([Bind(Include = "Id,Timestamp")] Inventory inventory)
+        public async Task<ActionResult> Delete([Bind(Include = "Id,Timestamp")] Inventory inventory)
         {
             try
             {
-                _repo.Delete(inventory);
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                ModelState.AddModelError(string.Empty, $@"Unable to delete the record. Another user has updated the record. {ex.Message}"); // Не удаётся удалить запись. Другой пользователь обновил её.
-                return View(inventory);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, $"{_baseUrl}/{inventory.Id}")
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(inventory), Encoding.UTF8, "application/json")
+                };
+                var response = await client.SendAsync(request);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $@"Unable to delete the record. {ex.Message}"); // Не удаётся удалить запись.
-                return View(inventory);
             }
-            return RedirectToAction("Index");
+            return View(inventory);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _repo.Dispose();
+                client.Dispose();
             }
             base.Dispose(disposing);
         }
