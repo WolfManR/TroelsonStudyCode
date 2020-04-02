@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3"/>
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\AutoLotDAL_Core2.Models\AutoLotDAL_Core2.Models.csproj" />
   </ItemGroup>
 
