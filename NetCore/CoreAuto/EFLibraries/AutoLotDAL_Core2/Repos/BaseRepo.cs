@@ -69,7 +69,7 @@ namespace AutoLotDAL_Core2.Repos
 
         public List<T> GetSome(Expression<Func<T, bool>> where) => _table.Where(where).ToList();
 
-        public List<T> GetAll() => _table.ToList();
+        public virtual List<T> GetAll() => _table.ToList();
         public List<T> GetAll<TSortField>(Expression<Func<T, TSortField>> orderBy, bool ascending) => (ascending ? _table.OrderBy(orderBy) : _table.OrderByDescending(orderBy)).ToList();
 
         public List<T> ExecuteQuery(string sql)
@@ -87,18 +87,18 @@ namespace AutoLotDAL_Core2.Repos
             {
                 return _db.SaveChanges();
             }
-            catch(DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException ex)
             {
                 // Генерируется, когда возникла ошибка, связанная с параллелизмом.
                 throw;
             }
-            catch(RetryLimitExceededException ex)
+            catch (RetryLimitExceededException ex)
             {
                 // Генерируется, когда достигнуто максимальное количество попыток.
                 // Дополнительные детали можно найти во внутреннем исключении(исключениях).
                 throw;
             }
-            catch(DbUpdateException ex)
+            catch (DbUpdateException ex)
             {
                 // Генерируется, когда обновление базы данных потерпело неудачу.
                 // Дополнительные детали и затронутые объекты можно найти во внутреннем исключении(исключениях).
