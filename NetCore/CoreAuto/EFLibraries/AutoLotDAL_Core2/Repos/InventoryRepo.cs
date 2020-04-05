@@ -9,6 +9,10 @@ namespace AutoLotDAL_Core2.Repos
 {
     public class InventoryRepo : BaseRepo<Inventory>, IInventoryRepo
     {
+        public InventoryRepo()
+        {
+        }
+
         public InventoryRepo(AutoLotContext context) : base(context)
         {
 

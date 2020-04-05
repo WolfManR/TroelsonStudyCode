@@ -72,14 +72,8 @@ namespace AutoLotDAL_Core2.Repos
         public virtual List<T> GetAll() => _table.ToList();
         public List<T> GetAll<TSortField>(Expression<Func<T, TSortField>> orderBy, bool ascending) => (ascending ? _table.OrderBy(orderBy) : _table.OrderByDescending(orderBy)).ToList();
 
-        public List<T> ExecuteQuery(string sql)
-        {
-            throw new NotImplementedException();
-        }
-        public List<T> ExecuteQuery(string sql, object[] sqlParametersObjects)
-        {
-            throw new NotImplementedException();
-        }
+        public List<T> ExecuteQuery(string sql) => _table.FromSqlRaw(sql).ToList();
+        public List<T> ExecuteQuery(string sql, object[] sqlParametersObjects) => _table.FromSqlRaw(sql, sqlParametersObjects).ToList();
 
         private int SaveChanges()
         {
