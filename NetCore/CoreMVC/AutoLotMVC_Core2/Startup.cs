@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoLotDAL_Core2.EF;
+using AutoLotDAL_Core2.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +27,8 @@ namespace AutoLotMVC_Core2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContextPool<AutoLotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AutoLot"), o => o.EnableRetryOnFailure()));
+            services.AddScoped<IInventoryRepo, InventoryRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
