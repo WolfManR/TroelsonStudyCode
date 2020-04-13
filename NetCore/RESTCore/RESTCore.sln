@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLotAPI_Core2", "AutoLotAPI_Core2\AutoLotAPI_Core2.csproj", "{80660CAE-8C6D-4224-9146-8E613F6777AC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLotDAL_Core2.Models", "EFLibraries\AutoLotDAL_Core2.Models\AutoLotDAL_Core2.Models.csproj", "{66523AA9-0CB5-46D2-BED5-4279B1768B73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFLibraries", "EFLibraries", "{F157185F-92F2-499D-823D-E1A9B7701127}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLotDAL_Core2", "EFLibraries\AutoLotDAL_Core2\AutoLotDAL_Core2.csproj", "{F8D7FBFB-ED6B-49E7-887B-316298A2C6F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,21 @@ Global
 		{80660CAE-8C6D-4224-9146-8E613F6777AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80660CAE-8C6D-4224-9146-8E613F6777AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80660CAE-8C6D-4224-9146-8E613F6777AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66523AA9-0CB5-46D2-BED5-4279B1768B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66523AA9-0CB5-46D2-BED5-4279B1768B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66523AA9-0CB5-46D2-BED5-4279B1768B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66523AA9-0CB5-46D2-BED5-4279B1768B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D7FBFB-ED6B-49E7-887B-316298A2C6F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D7FBFB-ED6B-49E7-887B-316298A2C6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D7FBFB-ED6B-49E7-887B-316298A2C6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D7FBFB-ED6B-49E7-887B-316298A2C6F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66523AA9-0CB5-46D2-BED5-4279B1768B73} = {F157185F-92F2-499D-823D-E1A9B7701127}
+		{F8D7FBFB-ED6B-49E7-887B-316298A2C6F0} = {F157185F-92F2-499D-823D-E1A9B7701127}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62936337-52D9-4E42-80D0-21A2CEFB5DB5}
