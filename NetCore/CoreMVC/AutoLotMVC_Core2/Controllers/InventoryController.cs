@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AutoLotDAL_Core2.EF;
 using AutoLotDAL_Core2.Models;
 using AutoLotDAL_Core2.Repos;
 
@@ -23,7 +18,7 @@ namespace AutoLotMVC_Core2.Controllers
         // GET: Inventory
         public IActionResult Index()
         {
-            return View(_repo.GetAll());
+            return View("IndexWithViewComponent");
         }
 
         // GET: Inventory/Details/5
