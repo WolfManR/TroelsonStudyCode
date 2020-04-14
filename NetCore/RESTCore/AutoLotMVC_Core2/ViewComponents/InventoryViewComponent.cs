@@ -14,7 +14,7 @@ namespace AutoLotMVC_Core2.ViewComponents
         private readonly string _baseUrl;
         public InventoryViewComponent(IConfiguration configuration)
         {
-            _baseUrl = configuration.GetSection("ServiceAddress").Value;
+            _baseUrl = configuration.GetSection("ServicesAddress").Value;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()

@@ -17,8 +17,9 @@ namespace AutoLotMVC_Core2.Controllers
         private readonly HttpClient client = new HttpClient();
         public InventoryController(IConfiguration configuration)
         {
-            _baseUrl = configuration.GetSection("ServiceAddress").Value;
+            _baseUrl = configuration.GetSection("ServicesAddress").Value;
         }
+
         public async Task<IActionResult> Index()
         {
             return View("IndexWithViewComponent");
