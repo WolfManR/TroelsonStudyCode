@@ -2,10 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoLotAPI_Core2.Filters;
+using AutoLotDAL_Core2.EF;
+using AutoLotDAL_Core2.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,8 +20,10 @@ namespace AutoLotAPI_Core2
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
         }
 
@@ -26,11 +32,18 @@ namespace AutoLotAPI_Core2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options =>
-            {
+            services.AddControllers(config => config.Filters.Add(new AutoLotExceptionFilter(_env))).AddNewtonsoftJson(options =>
+              {
                 // Use the default property (Pascal) casing
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            });
+              });
+            services.AddDbContextPool<AutoLotContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("AutoLot"),
+                   o => o.EnableRetryOnFailure()
+               )
+                );
+            services.AddScoped<IInventoryRepo, InventoryRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
