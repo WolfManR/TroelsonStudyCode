@@ -20,12 +20,7 @@ namespace AutoLotMVC_Core2.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var response = await client.GetAsync(_baseUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                return View(JsonConvert.DeserializeObject<List<Inventory>>(await response.Content.ReadAsStringAsync()));
-            }
-            return NotFound();
+            return View("IndexWithViewComponent");
         }
 
         private async Task<Inventory> GetInventoryRecord(int id)
